@@ -6,7 +6,8 @@ let genAI: GoogleGenAI | null = null;
 let chatSession: Chat | null = null;
 
 const initializeAI = () => {
-  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+  // @ts-ignore - Vite injects import.meta.env at build time
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEMINI_API_KEY;
   
   if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
     console.warn("Gemini API Key is missing or placeholder. AI features will be disabled.");
@@ -48,9 +49,12 @@ export const sendMessageToGemini = async (message: string): Promise<string> => {
   } catch (error: any) {
     console.error("Gemini Error:", error);
     
+    // @ts-ignore
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEMINI_API_KEY;
+    
     // Check if it's an API key issue
-    if (error?.message?.includes("API Key") || !process.env.API_KEY || process.env.API_KEY === 'PLACEHOLDER_API_KEY') {
-      return "⚠️ AI CORE OFFLINE: Please set your Gemini API key in .env.local file.\n\nTo enable AI features:\n1. Get a key from https://aistudio.google.com/app/apikey\n2. Add to .env.local: GEMINI_API_KEY=your_key_here\n3. Rebuild and redeploy";
+    if (error?.message?.includes("API Key") || !apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
+      return "⚠️ AI CORE OFFLINE: Please set your Gemini API key in .env.local file.\n\nTo enable AI features:\n1. Get a key from https://aistudio.google.com/app/apikey\n2. Add to .env.local: VITE_GEMINI_API_KEY=your_key_here\n3. Rebuild and redeploy";
     }
     
     return `System Alert: Connection error - ${error?.message || 'Unknown error'}`;
