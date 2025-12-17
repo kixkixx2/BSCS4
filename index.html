@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEXCS 4 Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ['"Share Tech Mono"', 'monospace'],
+              sans: ['"Rajdhani"', 'sans-serif'],
+            },
+            colors: {
+              cyber: {
+                black: '#0a0a0f',
+                dark: '#12121a',
+                slate: '#1e293b',
+                primary: '#00f0ff', // Cyan
+                secondary: '#ff003c', // Red/Pink
+                accent: '#fcee0a', // Yellow
+                dim: 'rgba(0, 240, 255, 0.1)',
+              }
+            },
+            animation: {
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'spin-slow': 'spin 12s linear infinite',
+              'glitch': 'glitch 1s linear infinite',
+              'scan': 'scan 4s linear infinite',
+              'blink': 'blink 1s step-end infinite',
+            },
+            keyframes: {
+              glitch: {
+                '2%, 64%': { transform: 'translate(2px,0) skew(0deg)' },
+                '4%, 60%': { transform: 'translate(-2px,0) skew(0deg)' },
+                '62%': { transform: 'translate(0,0) skew(5deg)' },
+              },
+              scan: {
+                '0%': { backgroundPosition: '0 0' },
+                '100%': { backgroundPosition: '0 40px' },
+              },
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #050505;
+        color: #e2e8f0;
+        overflow-x: hidden;
+        cursor: crosshair;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #12121a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #00f0ff; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00c0cc; 
+      }
+      
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+      
+      .preserve-3d {
+        transform-style: preserve-3d;
+      }
+      
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
